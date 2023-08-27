@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/client")
 public class ClientController {
 
-    private final ClientService clientService;
+    public final ClientService clientService;
 
     @GetMapping("/{idClient}")
     public Client getDataClient(@PathVariable Long idClient){
