@@ -1,11 +1,16 @@
 package com.example.callcenter.service;
 import com.example.callcenter.entity.Client;
+import com.example.callcenter.entity.Request;
 import com.example.callcenter.repository.ClientRepository;
+import com.example.callcenter.repository.RequestRepository;
 import lombok.AllArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -23,6 +28,7 @@ public class ClientService {
     public void deleteClient(Long idClient) {
         clientRepository.deleteById(idClient);
     }
+
 
 }
 

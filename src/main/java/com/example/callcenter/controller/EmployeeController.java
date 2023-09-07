@@ -12,13 +12,13 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/{idEmployee}")
+    @GetMapping("/getEmployee/{idEmployee}")
     public Employee getDataEmployee(@PathVariable Long idEmployee){return  employeeService.getDataEmployee(idEmployee);}
 
     @PostMapping("/addEmployee")
     public void postDataEmployee(@RequestBody Employee employee){employeeService.postDataEmployee(employee);}
 
-    @PostMapping
+    @PostMapping("/deleteEmployee/{idEmployee}")
     public void deleteEmployee(@PathVariable Long idEmployee){
         employeeService.deleteEmployee(idEmployee);
     }

@@ -1,5 +1,7 @@
 package com.example.callcenter.controller;
 
+
+
 import com.example.callcenter.entity.TransferRequest;
 import com.example.callcenter.service.RequestService;
 import lombok.AllArgsConstructor;
@@ -18,5 +20,9 @@ public class RequestController {
         requestService.addRequest(transferRequest);
     }
 
+    @GetMapping("/allRequestsClient/{idClient}")
+    public void getAllClientRequests(@PathVariable Long idClient){
+        requestService.getAllClientRequests(idClient);
+    }
 
 }

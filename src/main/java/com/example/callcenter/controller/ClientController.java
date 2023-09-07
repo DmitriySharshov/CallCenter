@@ -3,7 +3,7 @@ package com.example.callcenter.controller;
 import com.example.callcenter.entity.Client;
 import com.example.callcenter.service.ClientService;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Request;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,7 +13,7 @@ public class ClientController {
 
     public final ClientService clientService;
 
-    @GetMapping("/{idClient}")
+    @GetMapping("/getClient/{idClient}")
     public Client getDataClient(@PathVariable Long idClient){
         return clientService.getDataClient(idClient);
     }
@@ -23,8 +23,9 @@ public class ClientController {
         clientService.postDataClient(client);
     }
 
-    @PostMapping
+    @PostMapping("/deleteClient/{idClient}")
     public void deleteClient(@PathVariable Long idClient){ clientService.deleteClient(idClient);}
+
 
 }
 

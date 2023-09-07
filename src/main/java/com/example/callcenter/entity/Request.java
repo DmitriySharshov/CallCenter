@@ -11,19 +11,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="requests")
 public class Request {
+    private static final String SEQ_NAME = "request_seq";
     @Id
-    @Column(name="idRequest")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     private Long idRequest;
 
     @Column(name="msg")
     private String msg;
 
-    @JoinColumn(name="idClient")
-    @OneToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
     private Client client;
 
-    @JoinColumn(name="idEmployee")
-    @OneToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne (cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
     private Employee employee;
+
+
 }

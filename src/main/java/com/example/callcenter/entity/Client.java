@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,9 +13,10 @@ import java.util.ArrayList;
 @Table(name="clients")
 
 public class Client {
+    private static final String SEQ_NAME = "client_seq";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="idClient")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     private  Long idClient;
     @Column(name="name")
     private String name;
@@ -28,6 +28,9 @@ public class Client {
     private String phone;
     @Column(name="email")
     private String email;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private List <Request> request;
 
 
 }

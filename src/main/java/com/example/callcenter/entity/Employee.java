@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -12,9 +14,10 @@ import lombok.NoArgsConstructor;
 @Table(name="employeers")
 
 public class Employee {
+    private static final String SEQ_NAME = "employee_seq";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="idEmployee")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+    @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     private Long idEmployee;
     @Column(name="name")
     private String name;
@@ -31,5 +34,7 @@ public class Employee {
     @Column(name="password")
     private String password;
 
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    private List<Request> request;
 
 }

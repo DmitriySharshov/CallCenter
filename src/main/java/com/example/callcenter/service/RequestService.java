@@ -4,13 +4,14 @@ import com.example.callcenter.entity.Client;
 import com.example.callcenter.entity.Employee;
 import com.example.callcenter.entity.Request;
 import com.example.callcenter.entity.TransferRequest;
-import com.example.callcenter.service.ClientService;
-import com.example.callcenter.service.EmployeeService;
+
 import com.example.callcenter.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 public class RequestService {
     private final RequestRepository requestRepository;
+
     private final ClientService clientService;
     private final EmployeeService employeeService;
 
@@ -38,5 +40,13 @@ public class RequestService {
         request.setMsg(msg);
 
         requestRepository.save(request);
+    }
+
+    public List<Request> getAllClientRequests(Long idClient) {
+        List <Request> requestList = new ArrayList<>();
+        if (requestRepository.existsByClient(clientService.getDataClient(idClient))) {
+            requestList = requestRepository.getRequestByClient(idClient);
+        }
+        return requestList;
     }
 }
