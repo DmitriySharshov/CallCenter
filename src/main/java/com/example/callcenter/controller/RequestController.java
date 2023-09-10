@@ -2,11 +2,15 @@ package com.example.callcenter.controller;
 
 
 
+import com.example.callcenter.entity.Request;
 import com.example.callcenter.entity.TransferRequest;
 import com.example.callcenter.service.RequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -20,9 +24,16 @@ public class RequestController {
         requestService.addRequest(transferRequest);
     }
 
-    @GetMapping("/allRequestsClient/{idClient}")
-    public void getAllClientRequests(@PathVariable Long idClient){
-        requestService.getAllClientRequests(idClient);
+    @GetMapping( "/allRequestsClient/{idClient}")
+    @ResponseBody
+    public List<Request> getAllClientRequests(@PathVariable Long idClient){
+        List<Request> response = requestService.getAllClientRequests(idClient);
+        return response;
     }
 
+    @GetMapping("/allReaquestEmployee/{idEmployee}")
+    public List<Request> getAllEmployeeRequests(@PathVariable Long idEmployee){
+        List<Request> response = requestService.getAllEmployeeRequests(idEmployee);
+        return  response;
+    }
 }
