@@ -3,7 +3,7 @@ package com.example.callcenter.service;
 import com.example.callcenter.entity.Client;
 import com.example.callcenter.entity.Employee;
 import com.example.callcenter.entity.Request;
-import com.example.callcenter.entity.TransferRequest;
+import com.example.callcenter.entity.RequestDto;
 import com.example.callcenter.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +25,10 @@ public class RequestService {
 
 
 
-    public void addRequest(TransferRequest transferRequest) {
-        Client client = clientService.getDataClient(transferRequest.getFrom());
-        Employee employee = employeeService.getDataEmployee(transferRequest.getTo());
-        String msg = transferRequest.getMsg();
+    public void addRequest(RequestDto requestDto) {
+        Client client = clientService.getDataClient(requestDto.getFrom());
+        Employee employee = employeeService.getDataEmployee(requestDto.getTo());
+        String msg = requestDto.getMsg();
 
         if(client == null || employee == null) throw new IllegalArgumentException();
 

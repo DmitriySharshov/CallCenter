@@ -3,7 +3,7 @@ package com.example.callcenter.controller;
 
 
 import com.example.callcenter.entity.Request;
-import com.example.callcenter.entity.TransferRequest;
+import com.example.callcenter.entity.RequestDto;
 import com.example.callcenter.service.RequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,8 @@ public class RequestController {
     private final RequestService requestService;
 
     @PostMapping("/addRequest")
-    public void addRequest(@RequestBody TransferRequest transferRequest){
-        requestService.addRequest(transferRequest);
+    public void addRequest(@RequestBody RequestDto requestDto){
+        requestService.addRequest(requestDto);
     }
 
     @GetMapping( "/allRequestsClient/{idClient}")

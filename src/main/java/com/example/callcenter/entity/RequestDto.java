@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransferRequest {
-    private Long from;
-    private Long to;
+public class RequestDto {
+    private Long idClient;
+    private Long idEmployee;
     private String msg;
 }
