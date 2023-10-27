@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +22,9 @@ public class Request {
     @Column(name="msg")
     private String msg;
 
+
+    @CreationTimestamp
+    private LocalDate dateCreated;
 
     @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
     private Client client;

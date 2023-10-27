@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -25,9 +26,11 @@ public class RequestService {
 
 
 
+
+
     public void addRequest(RequestDto requestDto) {
-        Client client = clientService.getDataClient(requestDto.getFrom());
-        Employee employee = employeeService.getDataEmployee(requestDto.getTo());
+        Client client = clientService.getDataClient(requestDto.getIdClient());
+        Employee employee = employeeService.getDataEmployee(requestDto.getIdEmployee());
         String msg = requestDto.getMsg();
 
         if(client == null || employee == null) throw new IllegalArgumentException();
@@ -52,5 +55,16 @@ public class RequestService {
         Employee employee = employeeService.getDataEmployee(idEmployee);
         requestList = requestRepository.getRequestsByEmployee(employee);
         return requestList;
+    }
+
+    public List<Request> getAllRequestForSpaceTime(LocalDate fromTheDate, LocalDate toTheDate) {
+        List<Request> list = requestRepository.getRequestsByDateCreatedBetween(fromTheDate,toTheDate);
+
+        log.info("An INFO Message");
+        return list;
+    }
+
+    public Request getMessageOfRequest(String fragmentOfMessage) {
+        return requestRepository.getByMsg(fragmentOfMessage);
     }
 }
