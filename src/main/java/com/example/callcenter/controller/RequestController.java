@@ -1,12 +1,10 @@
 package com.example.callcenter.controller;
 
+import com.example.callcenter.entity.TransferRequest;
 import com.example.callcenter.service.RequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RestController
@@ -16,8 +14,8 @@ public class RequestController {
     private final RequestService requestService;
 
     @PostMapping("/addRequest")
-    public void addRequest(@PathVariable Long idClient,@PathVariable Long idEmployee,@PathVariable String msg){
-        requestService.addRequest(idClient, idEmployee, msg);
+    public void addRequest(@RequestBody TransferRequest transferRequest){
+        requestService.addRequest(transferRequest);
     }
 
 

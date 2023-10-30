@@ -15,16 +15,15 @@ public class Request {
     @Column(name="idRequest")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idRequest;
-    @Column(name="idClient")
-    private Long idClient;
-    @Column(name="idEmployee")
-    private Long idEmployee;
+
     @Column(name="msg")
     private String msg;
 
+    @JoinColumn(name="idClient")
     @OneToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Client client;
 
+    @JoinColumn(name="idEmployee")
     @OneToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Employee employee;
 }
