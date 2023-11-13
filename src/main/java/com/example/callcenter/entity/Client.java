@@ -26,7 +26,7 @@ public class Client {
     private String lastname;
     @Column(name="phone")
     private String phone;
-    @Column(name="email")
+    //@Column(name="email")
     private String email;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)

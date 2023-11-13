@@ -24,6 +24,7 @@ public class Request {
 
 
     @CreationTimestamp
+    @Column(name="date_created")
     private LocalDate dateCreated;
 
     @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)

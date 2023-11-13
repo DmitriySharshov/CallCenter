@@ -7,13 +7,12 @@ import com.example.callcenter.entity.RequestDto;
 import com.example.callcenter.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
 
-@SpringBootApplication
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -58,10 +57,7 @@ public class RequestService {
     }
 
     public List<Request> getAllRequestForSpaceTime(LocalDate fromTheDate, LocalDate toTheDate) {
-        List<Request> list = requestRepository.getRequestsByDateCreatedBetween(fromTheDate,toTheDate);
-
-        log.info("An INFO Message");
-        return list;
+        return requestRepository.getRequestsByDateCreatedBetween(fromTheDate,toTheDate);
     }
 
     public Request getMessageOfRequest(String fragmentOfMessage) {
