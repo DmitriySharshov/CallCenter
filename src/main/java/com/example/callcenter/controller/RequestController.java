@@ -46,8 +46,8 @@ public class RequestController {
 
     }
 
-    @GetMapping("/msgOfRequest/{fragmentOfMessage}")
-    public Request getMessageOfRequest(@PathVariable String fragmentOfMessage){
+    @GetMapping("/msgOfRequest")
+    public List<Request> getMessageOfRequest(@RequestParam(name = "fragmentOfMessage") String fragmentOfMessage){
         return requestService.getMessageOfRequest(fragmentOfMessage);
     }
 }

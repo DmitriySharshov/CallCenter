@@ -60,7 +60,7 @@ public class RequestService {
         return requestRepository.getRequestsByDateCreatedBetween(fromTheDate,toTheDate);
     }
 
-    public Request getMessageOfRequest(String fragmentOfMessage) {
-        return requestRepository.getByMsg(fragmentOfMessage);
+    public List <Request> getMessageOfRequest(String fragmentOfMessage) {
+        return requestRepository.getRequestsByMsgContains(fragmentOfMessage);
     }
 }
