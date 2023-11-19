@@ -8,6 +8,9 @@ import com.example.callcenter.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -61,6 +64,19 @@ public class RequestService {
     }
 
     public List <Request> getMessageOfRequest(String fragmentOfMessage) {
-        return requestRepository.getRequestsByMsgContains(fragmentOfMessage);
+        List <Request> requestList = requestRepository.getRequestsByMsgContains(fragmentOfMessage);
+        try{
+            FileWriter writer = new FileWriter("C:\\Users\\User\\Desktop\\requests.txt");
+            for (Request request :requestList) {
+                String msg = request.getMsg();
+                writer.write(msg+" "+ System.getProperty("line.separator"));
+                System.out.println(msg);
+            }
+            writer.close();
+        }catch(IOException e){
+            System.out.println("Ошибка создания файла!");
+        }
+
+        return null;
     }
 }
