@@ -6,6 +6,7 @@ import com.example.callcenter.entity.Request;
 import com.example.callcenter.entity.RequestDto;
 import com.example.callcenter.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +14,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.logging.Logger;
 
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 
-public class RequestService {
-    private final RequestRepository requestRepository;
 
+
+public class RequestService {
+
+    private final RequestRepository requestRepository;
     private final ClientService clientService;
     private final EmployeeService employeeService;
 
@@ -64,7 +67,9 @@ public class RequestService {
     }
 
     public List <Request> getMessageOfRequest(String fragmentOfMessage) {
+
         List <Request> requestList = requestRepository.getRequestsByMsgContains(fragmentOfMessage);
+
         try{
             FileWriter writer = new FileWriter("C:\\Users\\User\\Desktop\\requests.txt");
             for (Request request :requestList) {
@@ -76,7 +81,7 @@ public class RequestService {
         }catch(IOException e){
             System.out.println("Ошибка создания файла!");
         }
-
-        return null;
+        log.info("Saving new{}",requestList);
+        return requestList;
     }
 }

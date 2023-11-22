@@ -14,7 +14,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> getRequestsByEmployee(Employee employee);
     List<Request> getRequestsByDateCreatedBetween(LocalDate fromTheDate, LocalDate toTheDate);
 
-    @Query(value = "select msg from requests where msg like '%fragmentOfMessage%'", nativeQuery = true)
+    @Query(value = "select * from requests where msg like '%fragmentOfMessage%'", nativeQuery = true)
     List <Request> getRequestsByMsgContains(String fragmentOfMessage);
 
 }
