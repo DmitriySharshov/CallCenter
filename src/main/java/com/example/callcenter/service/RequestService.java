@@ -6,15 +6,13 @@ import com.example.callcenter.entity.Request;
 import com.example.callcenter.entity.RequestDto;
 import com.example.callcenter.repository.RequestRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 
 @Service
@@ -67,21 +65,24 @@ public class RequestService {
     }
 
     public List <Request> getMessageOfRequest(String fragmentOfMessage) {
+        List <Request> requestList = requestRepository.getMsgFragmentMessage(fragmentOfMessage);
+        writeToFile(requestList);
+        //writeToFile();
+        log.info("Saving new{}",requestList);
+        return requestList;
+    }
 
-        List <Request> requestList = requestRepository.getRequestsByMsgContains(fragmentOfMessage);
-
+    public void writeToFile (List<Request> requestList){
+        //List<Request> requestList = requestRepository.findAll();
         try{
             FileWriter writer = new FileWriter("C:\\Users\\User\\Desktop\\requests.txt");
             for (Request request :requestList) {
-                String msg = request.getMsg();
-                writer.write(msg+" "+ System.getProperty("line.separator"));
-                System.out.println(msg);
+                writer.write(request.getIdRequest()+" "+request.getMsg()+" "+request.getClient()+
+                        " "+request.getEmployee()+" "+request.getDateCreated()+" "+System.getProperty("line.separator"));
             }
             writer.close();
         }catch(IOException e){
             System.out.println("Ошибка создания файла!");
         }
-        log.info("Saving new{}",requestList);
-        return requestList;
     }
 }
