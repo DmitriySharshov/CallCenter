@@ -27,7 +27,7 @@ class ClientServiceTest {
 
     @Test
     void postDataClient() {
-        Client client = new Client("τττ","τττ","τττ","τττ","ττττ");
+        Client client = new Client() ;
         boolean isClientCreated = clientService.postDataClient(client);
         Assert.assertTrue(isClientCreated);
     }
