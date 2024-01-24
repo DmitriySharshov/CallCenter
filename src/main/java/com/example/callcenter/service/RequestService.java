@@ -44,6 +44,8 @@ public class RequestService {
         request.setMsg(msg);
 
         requestRepository.save(request);
+
+
     }
 
     public List<Request> getAllClientRequests(Long idClient) {
@@ -66,9 +68,6 @@ public class RequestService {
 
     public List <Request> getMessageOfRequest(String fragmentOfMessage) {
         List <Request> requestList = requestRepository.getMsgFragmentMessage(fragmentOfMessage);
-        writeToFile(requestList);
-        //writeToFile();
-        log.info("Saving new{}",requestList);
         return requestList;
     }
 

@@ -21,8 +21,9 @@ public class ClientService {
         return clientRepository.findById(idClient).orElse(null);
     }
 
-    public void postDataClient(Client client) {
+    public boolean postDataClient(Client client) {
         clientRepository.save(client);
+        return true;
     }
 
     public void deleteClient(Long idClient) {

@@ -32,5 +32,11 @@ public class Client {
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private List <Request> request;
 
-
+    public Client(String name, String surname, String lastname, String phone, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.email = email;
+    }
 }
