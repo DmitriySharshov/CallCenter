@@ -20,9 +20,8 @@ public class EmployeeService {
         return employeeRepository.findById(idEmployee).orElse(null);
     }
 
-    public void postDataEmployee(Employee employee) {
-       log.info("Saving new{}",employee);
-       employeeRepository.save(employee);
+    public Employee postDataEmployee(Employee employee) {
+       return employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Long idEmployee) { employeeRepository.deleteById(idEmployee);

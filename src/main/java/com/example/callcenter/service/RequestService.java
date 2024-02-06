@@ -31,7 +31,7 @@ public class RequestService {
 
 
 
-    public void addRequest(RequestDto requestDto) {
+    public Request addRequest(RequestDto requestDto) {
         Client client = clientService.getDataClient(requestDto.getIdClient());
         Employee employee = employeeService.getDataEmployee(requestDto.getIdEmployee());
         String msg = requestDto.getMsg();
@@ -43,7 +43,7 @@ public class RequestService {
         request.setEmployee(employee);
         request.setMsg(msg);
 
-        requestRepository.save(request);
+        return requestRepository.save(request);
 
 
     }

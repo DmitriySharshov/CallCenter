@@ -14,8 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class ClientServiceTest {
@@ -27,8 +26,17 @@ class ClientServiceTest {
 
     @Test
     void postDataClient() {
-        Client client = new Client() ;
-        boolean isClientCreated = clientService.postDataClient(client);
-        Assert.assertTrue(isClientCreated);
+        Client client = new Client();
+        client.setName("Test_client");
+        Client createdClient = clientService.postDataClient(client);
+        Assert.assertTrue(createdClient!=null);
+
+        Long id = createdClient.getIdClient();
+        Client dbClient = clientService.getDataClient(id);
+        Assert.assertTrue(dbClient!=null);
+
+        clientService.deleteClient(dbClient.getIdClient());
+        Client afterDelete = clientService.getDataClient(dbClient.getIdClient());
+        Assert.assertTrue(afterDelete == null);
     }
 }
