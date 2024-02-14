@@ -4,13 +4,17 @@ import com.example.callcenter.entity.Client;
 import com.example.callcenter.entity.Employee;
 import com.example.callcenter.entity.Request;
 import com.example.callcenter.entity.RequestDto;
+import com.example.callcenter.repository.RequestRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
+
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
@@ -19,6 +23,10 @@ class RequestServiceTest {
 
     @Autowired
     private RequestService requestService;
+
+
+    @Autowired
+    private RequestRepository requestRepository;
 
     @Test
     void postRequest(){
@@ -41,5 +49,13 @@ class RequestServiceTest {
 
         Request createdRequest = requestService.addRequest(dto);
         Assert.assertNotNull("Test_add_request",createdRequest);
+    }
+
+    @Test
+    void getEmployeeAllRequest(){
+        Employee employee = new Employee();
+        List<Request> requestsList;
+        requestsList = requestRepository.getRequestsByEmployee(employee);
+        Assert.assertNotNull(requestsList);
     }
 }
