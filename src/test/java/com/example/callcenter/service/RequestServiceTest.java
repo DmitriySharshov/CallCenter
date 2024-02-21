@@ -24,6 +24,12 @@ class RequestServiceTest {
     @Autowired
     private RequestService requestService;
 
+    @Autowired
+    private ClientService clientService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
 
     @Autowired
     private RequestRepository requestRepository;
@@ -33,19 +39,16 @@ class RequestServiceTest {
 
         Client client = new Client();
         client.setName("Test");
+        Client createdClient =  clientService.postDataClient(client);
         Employee employee = new Employee();
         employee.setName("Test1");
+        Employee createdEmployee = employeeService.postDataEmployee(employee);
+
 
         RequestDto dto = new RequestDto();
-        dto.setIdClient(client.getIdClient());
-        dto.setIdEmployee(employee.getIdEmployee());
+        dto.setIdClient(createdClient.getIdClient());
+        dto.setIdEmployee(createdEmployee.getIdEmployee());
         dto.setMsg("Test_Msg");
-
-        Request request = new Request();
-        request.setIdRequest(100L);
-        request.setClient(client);
-        request.setEmployee(employee);
-        request.setMsg("Test");
 
         Request createdRequest = requestService.addRequest(dto);
         Assert.assertNotNull("Test_add_request",createdRequest);
@@ -54,8 +57,24 @@ class RequestServiceTest {
     @Test
     void getEmployeeAllRequest(){
         Employee employee = new Employee();
+        employee.setName("Test_Employee");
+        Employee createdEmployee = employeeService.postDataEmployee(employee);
+
+        Employee dbEmployee = employeeService.getDataEmployee(createdEmployee.getIdEmployee());
         List<Request> requestsList;
-        requestsList = requestRepository.getRequestsByEmployee(employee);
+        requestsList = requestRepository.getRequestsByEmployee(dbEmployee);
         Assert.assertNotNull(requestsList);
+    }
+
+    @Test
+    void getClientAllRequest(){
+        Client client = new Client();
+        client.setName("Test_client");
+        Client createdClient = clientService.postDataClient(client);
+
+        Client dbClient = clientService.getDataClient(createdClient.getIdClient());
+        List<Request> requestList;
+        requestList = requestRepository.getRequestsByClient(dbClient);
+        Assert.assertNotNull(requestList);
     }
 }
